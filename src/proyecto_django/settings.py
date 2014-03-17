@@ -36,6 +36,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'facturacion',
+    'home',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -63,7 +65,7 @@ TEMPLATE_DIRS = (
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'demo',
+        'NAME': 'proyecto',
         'USER': 'ruben',
         'PASSWORD': 'ruben',
         'HOST': 'localhost',

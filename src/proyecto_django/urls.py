@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^', include('facturacion.urls')),
     url(r'^$',index_view, name='vista_index'),
     url(r'^index/$',  index_view, name='vista_index'),
     url(r'^login/$',  login_view, name='vista_login'),

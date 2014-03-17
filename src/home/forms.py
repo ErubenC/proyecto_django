@@ -1,5 +1,4 @@
 from django import forms
-from django.db.models.fields import EmailField
 '''
 class ContactForm(forms.Form):
     Email = forms.EmailField(widget=forms.TextInput())
