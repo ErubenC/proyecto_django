@@ -31,3 +31,8 @@ def login_view(request):
         ctx = {'form':form,'mensaje':mensaje}
         return render_to_response('home/login.html',ctx,context_instance=RequestContext(request))
     
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect('/')
+    
+    
