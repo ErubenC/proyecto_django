@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from home.views import index_view, login_view
+from home import views
 
 from django.contrib import admin
 admin.autodiscover()
@@ -14,4 +14,5 @@ urlpatterns = patterns('',
     url(r'^$',index_view, name='vista_index'),
     url(r'^index/$',  index_view, name='vista_index'),
     url(r'^login/$',  login_view, name='vista_login'),
+    url(r'^logout/$', views.logout_view,name='vista_logout'),
 )

@@ -12,7 +12,11 @@
 	<a href="#"> Contabilidad </a>
 	<a href="#"> Procesos Varios </a>
 	<a href="#"> Acerca de </a>
+	{% if user.is_authenticated %}
+	<a href="{% url 'vista_logout' %}"> Logout - {{user.username}}</a>
+	{% else %}
 	<a href="{% url 'vista_login' %}"> Login </a>
+	{% endif %}
 </nav>
 </header>
 
