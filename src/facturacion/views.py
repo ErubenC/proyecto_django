@@ -1,8 +1,9 @@
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
-from facturacion.forms import MarcaForm,BodegaForm,UnidadForm,GrupoForm
-from facturacion.models import Marca, GrupoItem, Bodega, Unidad
+from facturacion.forms import MarcaForm,BodegaForm,UnidadForm,GrupoForm,\
+    ItemForm
+from facturacion.models import Marca, GrupoItem, Bodega, Unidad, Item
 
 
 def facturacion_view(request):
@@ -89,4 +90,40 @@ def unidad_view(request):
         form = UnidadForm()
         ctx = {"form":form}
         return render_to_response("facturacion/unidad.html",ctx,context_instance=RequestContext(request))
+   
+def item_view(request):
+    mensaje = ""
+    if request.method == "POST":
+        form = ItemForm(request.POST)
+        if form.is_valid():
+            u = Item()
+            u.codigo_propio = form.cleaned_data['codigo_propio']
+            u.codigo_barras = form.cleaned_data['codigo_barras']
+            u.descripcion = form.cleaned_data['descripcion']
+            if form.cleaned_data['Bien_o_Servicio'] == "Bien":
+                u.es_bien = True
+                u.es_servicio = False
+            else:
+                u.es_bien = False
+                u.es_servicio = True
+            u.iva = form.cleaned_data['iva']
+            u.ubicacion = form.cleaned_data['ubicacion']
+            u.id_marca = form.cleaned_data['marca']
+            u.id_grupo = form.cleaned_data['grupo']
+            u.id_unidad = form.cleaned_data['unidad']
+            u.save()
+            ''''u.nombre = form.cleaned_data['nombre']
+            u.codigo_propio = form.cleaned_data['codigo_propio']
+            u.descripcion = form.cleaned_data['descripcion']
+            u.save()'''
+            mensaje = "Se agrego satisfactoriamente."
+        else:
+            mensaje = "Llene correctamente los campos."
+        form = ItemForm()
+        ctx = {"form":form,"mensaje":mensaje}
+        return render_to_response("facturacion/item.html",ctx,context_instance=RequestContext(request))
+    else:
+        form = ItemForm()
+        ctx = {"form":form}
+        return render_to_response("facturacion/item.html",ctx,context_instance=RequestContext(request))
    
