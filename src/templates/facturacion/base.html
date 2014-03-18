@@ -2,6 +2,12 @@
 <html lang="es">
 <head>
     <title> {% block title %} Titulo Base {% endblock %}</title>
+    {% block css %}<link rel="stylesheet" href="/media/css/jquery-ui.css" />{% endblock css %}
+    {% block js %}
+	  <script src="/media/js/jquery-1.9.1.js"></script>
+	  <script src="/media/js/jquery-ui.js"></script>
+    {% endblock js %}
+    {% block script %}{% endblock script %}
 </head>
 <body>
 <header>

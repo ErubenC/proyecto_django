@@ -86,6 +86,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+MEDIA_ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__),'../media/'))
+
+MEDIA_URL = '../media/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/

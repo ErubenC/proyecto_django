@@ -93,6 +93,24 @@ def unidad_view(request):
    
 def item_view(request):
     mensaje = ""
+    marca = Marca.objects.all()
+    marcas = ""
+    for m in marca:
+        marcas = marcas+''+m.__getattribute__('nombre')+" ("+m.__getattribute__('codigo_propio')+'),'
+    
+    
+    unidad = Unidad.objects.all()
+    unidades = ""
+    for u in unidad:
+        unidades = unidades+''+u.__getattribute__('nombre')+" ("+u.__getattribute__('codigo_propio')+'),'
+    
+    
+    grupo = GrupoItem.objects.all()
+    grupos = ""
+    for g in grupo:
+        grupos = grupos+''+g.__getattribute__('nombre')+" ("+g.__getattribute__('codigo_propio')+'),'
+    
+       
     if request.method == "POST":
         form = ItemForm(request.POST)
         if form.is_valid():
@@ -120,10 +138,10 @@ def item_view(request):
         else:
             mensaje = "Llene correctamente los campos."
         form = ItemForm()
-        ctx = {"form":form,"mensaje":mensaje}
+        ctx = {"form":form,"mensaje":mensaje,"marcas":marcas,"unidades":unidades,"grupos":grupos}
         return render_to_response("facturacion/item.html",ctx,context_instance=RequestContext(request))
     else:
         form = ItemForm()
-        ctx = {"form":form}
+        ctx = {"form":form,"marcas":marcas,"unidades":unidades,"grupos":grupos}
         return render_to_response("facturacion/item.html",ctx,context_instance=RequestContext(request))
    
