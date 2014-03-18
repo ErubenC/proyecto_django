@@ -5,6 +5,8 @@ class ContactForm(forms.Form):
     Titulo = forms.CharField(widget=forms.TextInput())
     Texto = forms.CharField(widget=forms.Textarea())
    ''' 
+BIEN_SERVICIO = (('Bien', 'Bien'), ('Servicio', 'Servicio'))   
+   
 class LoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput())
     password = forms.CharField(widget=forms.PasswordInput(render_value=False))

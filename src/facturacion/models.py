@@ -12,11 +12,12 @@ class GrupoItem(models.Model):
 class Unidad(models.Model):
     nombre = models.CharField(max_length=30)
     codigo_propio   =   models.CharField(max_length=50)
+    descripcion = models.CharField(max_length=200)
     
 class Bodega(models.Model):
     nombre  = models.CharField(max_length=50)
-    direccion   = models.CharField(max_length=50)
     codigo_propio   =   models.CharField(max_length=50)
+    direccion   = models.CharField(max_length=50)
 
 class Item(models.Model):
     codigo_barras   = models.CharField(max_length=50)

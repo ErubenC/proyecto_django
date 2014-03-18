@@ -6,10 +6,6 @@ from home.forms import LoginForm
 
 def index_view(request):
     return render_to_response('base.html', context_instance=RequestContext(request))
-'''
-def login_view(request):
-    return render_to_response('home/login.html', context_instance=RequestContext(request))
-    '''
 
 def login_view(request):
     mensaje = ""
