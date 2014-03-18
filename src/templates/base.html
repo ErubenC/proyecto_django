@@ -2,21 +2,41 @@
 <html lang="es">
 <head>
     <title> {% block title %} Titulo Base {% endblock %}</title>
+    {% block css %}
+    <link rel="stylesheet" href="/media/css/jquery-ui.css" />
+    <link rel="stylesheet" href="/media/css/bootstrap.css" />
+    {% endblock css %}
+    {% block js %}
+	  <script src="/media/js/jquery-1.9.1.js"></script>
+	  <script src="/media/js/jquery-ui.js"></script>
+    <script src="/media/js/bootstrap.js"></script>
+    {% endblock js %}
 </head>
+
 <body>
 <header>
 <h1>Proyecto de Contabilidad - Django</h1>
-<nav>
-	<a href="#"> Inicio </a>
-	<a href="{% url 'vista_facturacion' %}"> Facturacion </a>
-	<a href="#"> Contabilidad </a>
-	<a href="#"> Procesos Varios </a>
-	<a href="#"> Acerca de </a>
+<nav class="navbar navbar-default" role="navigation">
+	<ul class="nav navbar-nav">
+	<li><a href="#"> Inicio </a></li>
+	<li class="dropdown">
+	<a class="dropdown-toggle" data-toggle="dropdown" href="#">Facturacion <b class="caret"></b></a>
+		<ul class="dropdown-menu " role="menu" >
+			<li><a href="{% url 'vista_facturacion' %}">Manejo de items</a></li>
+			<li class="divider"></li>
+			<li><a href="#">Documentos</a></li>
+            <li><a href="#">Grupos de documentos</a></li>
+        </ul>
+	</li>
+	<li><a href="#"> Contabilidad </a></li>
+	<li><a href="#"> Procesos Varios </a></li>
+	<li><a href="#"> Acerca de </a></li>
 	{% if user.is_authenticated %}
-	<a href="{% url 'vista_logout' %}"> Logout - {{user.username}}</a>
+	<li><a href="{% url 'vista_logout' %}"> Logout - {{user.username}}</a></li>
 	{% else %}
-	<a href="{% url 'vista_login' %}"> Login </a>
+	<li><a href="{% url 'vista_login' %}"> Login </a></li>
 	{% endif %}
+	</ul>
 </nav>
 </header>
 

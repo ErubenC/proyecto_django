@@ -4,11 +4,13 @@ from django.template import RequestContext
 from facturacion.forms import MarcaForm,BodegaForm,UnidadForm,GrupoForm,\
     ItemForm
 from facturacion.models import Marca, GrupoItem, Bodega, Unidad, Item
+from django.contrib.auth.decorators import login_required, user_passes_test
+
 
 
 def facturacion_view(request):
     return render_to_response("facturacion/base.html", context_instance=RequestContext(request))
-
+ 
 def marca_view(request):
     mensaje = ""
     if request.method == "POST":
