@@ -90,23 +90,3 @@ def unidad_view(request):
         ctx = {"form":form}
         return render_to_response("facturacion/unidad.html",ctx,context_instance=RequestContext(request))
    
-''' 
-def grupo_view(request):
-    form = GrupoForm()
-    ctx = {"form":form}
-    return render_to_response("facturacion/grupo.html",ctx,context_instance=RequestContext(request))
-
-def bodega_view(request):
-    form = BodegaForm()
-    ctx = {"form":form}
-    return render_to_response("facturacion/bodega.html",ctx,context_instance=RequestContext(request))
-
-def unidad_view(request):
-    form = UnidadForm()
-    ctx = {"form":form}
-    return render_to_response("facturacion/unidad.html",ctx,context_instance=RequestContext(request))
-
-
-
-'''
-

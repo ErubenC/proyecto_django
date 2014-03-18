@@ -1,0 +1,17 @@
+{% extends 'facturacion/base.html' %}
+{% block title %} Agregar Bodega {% endblock %}
+{% block content %}
+<br> <h2>Agregar Bodega</h2>
+
+<form action="." method="POST">
+
+	{% csrf_token %}
+	{{ mensaje }}
+	{{ form.as_p }}
+	<input type="submit" value="Agregar">
+	<input type="reset" value="Limpiar">
+
+</form>
+
+
+{% endblock %}
