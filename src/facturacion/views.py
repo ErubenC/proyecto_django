@@ -7,10 +7,19 @@ from facturacion.models import Marca, GrupoItem, Bodega, Unidad, Item
 from django.contrib.auth.decorators import login_required, user_passes_test
 
 
+def not_in_facturacion_group(user):
+    if user:
+        x = user.groups.filter(name='facturacion').count() == 1
+        print x
+        return x
+    return False
 
+@login_required
+@user_passes_test(not_in_facturacion_group, login_url='/login')
 def facturacion_view(request):
     return render_to_response("facturacion/base.html", context_instance=RequestContext(request))
- 
+
+
 def marca_view(request):
     mensaje = ""
     if request.method == "POST":
@@ -99,20 +108,17 @@ def item_view(request):
     marcas = ""
     for m in marca:
         marcas = marcas+''+m.__getattribute__('nombre')+" ("+m.__getattribute__('codigo_propio')+'),'
-    
-    
+      
     unidad = Unidad.objects.all()
     unidades = ""
     for u in unidad:
         unidades = unidades+''+u.__getattribute__('nombre')+" ("+u.__getattribute__('codigo_propio')+'),'
-    
     
     grupo = GrupoItem.objects.all()
     grupos = ""
     for g in grupo:
         grupos = grupos+''+g.__getattribute__('nombre')+" ("+g.__getattribute__('codigo_propio')+'),'
     
-       
     if request.method == "POST":
         form = ItemForm(request.POST)
         if form.is_valid():

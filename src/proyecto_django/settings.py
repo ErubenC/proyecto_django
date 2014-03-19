@@ -94,3 +94,5 @@ MEDIA_URL = '../media/'
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGIN_URL = '/login'

@@ -18,7 +18,9 @@
 <h1>Proyecto de Contabilidad - Django</h1>
 <nav class="navbar navbar-default" role="navigation">
 	<ul class="nav navbar-nav">
-	<li><a href="#"> Inicio </a></li>
+	<li><a href="/"> Inicio </a></li>
+	{% if user.is_authenticated %}
+	{% if facturacion %}
 	<li class="dropdown">
 	<a class="dropdown-toggle" data-toggle="dropdown" href="#">Facturacion <b class="caret"></b></a>
 		<ul class="dropdown-menu " role="menu" >
@@ -28,8 +30,14 @@
             <li><a href="#">Grupos de documentos</a></li>
         </ul>
 	</li>
+	{% endif %}
+	{% if contabilidad %}
 	<li><a href="#"> Contabilidad </a></li>
+	{% endif %}
 	<li><a href="#"> Procesos Varios </a></li>
+	
+	
+	{% endif %}
 	<li><a href="#"> Acerca de </a></li>
 	{% if user.is_authenticated %}
 	<li><a href="{% url 'vista_logout' %}"> Logout - {{user.username}}</a></li>
@@ -41,6 +49,7 @@
 </header>
 
 <section>
+	<h2>{{ advertencia }}</h2>
 	{% block content %}
 	{% endblock %}
 </section>
