@@ -3,23 +3,31 @@
 {% block script %}
 
 <script>
-
+var marcas="";
+var unidades="";
+var grupos="";
 
 
   $(function() {
   	
   
-    var marcas = '{{marcas}}';
+    marcas = '{{marcas}}';
     marcas=marcas.replace(/\&quot;/g, '"')
     marcas=marcas.split(",");
     
-    var unidades = '{{unidades}}';
+    //[{ value: 'Andorra', data: 'AD' },{ value: 'Zimbabwe', data: 'ZZ' }]
+    
+    unidades = '{{unidades}}';
     unidades=unidades.replace(/\&quot;/g, '"')
     unidades=unidades.split(",");
     
-    var grupos = '{{grupos}}';
+    grupos = '{{grupos}}';
     grupos=grupos.replace(/\&quot;/g, '"')
     grupos=grupos.split(",");
+    
+    bodegas = '{{bodegas}}';
+    bodegas=bodegas.replace(/\&quot;/g, '"')
+    bodegas=bodegas.split(",");
     
     
     $( "#id_marca" ).autocomplete({
@@ -33,6 +41,48 @@
     $( "#id_grupo" ).autocomplete({
       source: grupos
     });
+    
+    $( "#id_bodega" ).autocomplete({
+      source: bodegas
+    });
+    
+    
+    
+    $("#formulario").submit(function(e){
+
+         dataString = $("#formulario").serialize();
+         $("#id_marca").val()
+         mensaje = "";
+         if(marcas.indexOf($("#id_marca").val())==(marcas.length-1)
+         	||marcas.indexOf($("#id_marca").val())==-1)
+         	mensaje=mensaje+'seleccione una Marca existente\n';
+         
+         if(unidades.indexOf($("#id_unidad").val())==(unidades.length-1)
+         	||unidades.indexOf($("#id_unidad").val())==-1)
+         	mensaje=mensaje+'seleccione una Unidad existente\n';
+         
+         if(grupos.indexOf($("#id_grupo").val())==(grupos.length-1)
+         	||grupos.indexOf($("#id_grupo").val())==-1)
+         	mensaje=mensaje+'seleccione un Grupo existente\n';
+         	
+         if(bodegas.indexOf($("#id_bodega").val())==-1)
+         	mensaje=mensaje+'seleccione una Bodega existente\n';
+         	
+         if(mensaje!=""){
+         		alert(mensaje);
+         		return false;
+         	}
+	 	$.post('/item', $('#formulario').serialize())
+         //return false;  //stop the actual form post !important!
+ 
+      });
+    
+    
+    
+    
+    
+    
+    
   });
   </script>
 {% endblock script %}
@@ -40,7 +90,7 @@
 
 <br> <h2>Agregar Item</h2>
 
-<form action="." method="POST">
+<form action="." method="POST" id="formulario">
 
 	{% csrf_token %}
 	{{ mensaje }}

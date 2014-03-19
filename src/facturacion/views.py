@@ -5,6 +5,7 @@ from facturacion.forms import MarcaForm,BodegaForm,UnidadForm,GrupoForm,\
     ItemForm
 from facturacion.models import Marca, GrupoItem, Bodega, Unidad, Item
 from django.contrib.auth.decorators import login_required, user_passes_test
+from pcardext import cp
 
 
 
@@ -112,6 +113,12 @@ def item_view(request):
     for g in grupo:
         grupos = grupos+''+g.__getattribute__('nombre')+" ("+g.__getattribute__('codigo_propio')+'),'
     
+    
+    bodega = Bodega.objects.all()
+    bodegas = ""
+    for bo in bodega:
+        bodegas = bodegas+''+bo.__getattribute__('nombre')+" ("+bo.__getattribute__('codigo_propio')+'),'
+    
        
     if request.method == "POST":
         form = ItemForm(request.POST)
@@ -128,22 +135,31 @@ def item_view(request):
                 u.es_servicio = True
             u.iva = form.cleaned_data['iva']
             u.ubicacion = form.cleaned_data['ubicacion']
-            u.id_marca = form.cleaned_data['marca']
-            u.id_grupo = form.cleaned_data['grupo']
-            u.id_unidad = form.cleaned_data['unidad']
+            
+            cp = form.cleaned_data['marca'].split("(")[1].split(")")[0]
+            u.id_marca = Marca.objects.filter(codigo_propio=cp).first()
+            
+            cp = form.cleaned_data['grupo'].split("(")[1].split(")")[0]
+            u.id_grupo = GrupoItem.objects.filter(codigo_propio=cp).first()
+            
+            cp = form.cleaned_data['unidad'].split("(")[1].split(")")[0]
+            u.id_unidad = Unidad.objects.filter(codigo_propio=cp).first()
+            
             u.save()
-            ''''u.nombre = form.cleaned_data['nombre']
-            u.codigo_propio = form.cleaned_data['codigo_propio']
-            u.descripcion = form.cleaned_data['descripcion']
-            u.save()'''
+            
+            if(form.cleaned_data['bodega']!=""):
+                cp = form.cleaned_data['bodega'].split("(")[1].split(")")[0]
+                bod = Bodega.objects.filter(codigo_propio=cp).first()
+                u.item_bodega.add(bod)
+            
             mensaje = "Se agrego satisfactoriamente."
         else:
             mensaje = "Llene correctamente los campos."
         form = ItemForm()
-        ctx = {"form":form,"mensaje":mensaje,"marcas":marcas,"unidades":unidades,"grupos":grupos}
+        ctx = {"form":form,"mensaje":mensaje,"marcas":marcas,"unidades":unidades,"grupos":grupos,"bodegas":bodegas}
         return render_to_response("facturacion/item.html",ctx,context_instance=RequestContext(request))
     else:
         form = ItemForm()
-        ctx = {"form":form,"marcas":marcas,"unidades":unidades,"grupos":grupos}
+        ctx = {"form":form,"marcas":marcas,"unidades":unidades,"grupos":grupos,"bodegas":bodegas}
         return render_to_response("facturacion/item.html",ctx,context_instance=RequestContext(request))
    

@@ -36,6 +36,7 @@ class ItemForm(forms.Form):
     marca = forms.CharField(widget=forms.TextInput())
     unidad = forms.CharField(widget=forms.TextInput())
     grupo = forms.CharField(widget=forms.TextInput())
+    bodega = forms.CharField(widget=forms.TextInput(),required=False)
     #grupo = forms.ModelChoiceField(queryset=GrupoItem.objects.all())
     #unidad = forms.ModelChoiceField(queryset=Unidad.objects.all())
     #marca = forms.CharField(widget=forms.TextInput())
