@@ -13,5 +13,6 @@ urlpatterns = patterns('',
     url(r'^item/$',  views.item_view, name='vista_item'),
     url(r'^proveedores/$',  views.proveedores_view, name='vista_proveedores'),
     url(r'^clientes/$',  views.clientes_view, name='vista_clientes'),
+    url(r'^carga_cantones/$',  views.carga_cantones_view, name='vista_carga_cantones'),
     
 )

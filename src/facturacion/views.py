@@ -4,7 +4,7 @@ from django.template import RequestContext
 from facturacion.forms import MarcaForm,BodegaForm,UnidadForm,GrupoForm,\
     ItemForm, ProveedoresForm, ClientesForm
 from facturacion.models import Marca, GrupoItem, Bodega, Unidad, Item, Proveedor,\
-    Cliente
+    Cliente, Canton
 from django.contrib.auth.decorators import login_required, user_passes_test
 from pcardext import cp
 
@@ -195,6 +195,16 @@ def proveedores_view(request):
         form = ProveedoresForm()
         ctx = {"form":form}
         return render_to_response("facturacion/proveedor.html",ctx,context_instance=RequestContext(request))
+    
+    
+def carga_cantones_view(request):
+    if request.method == "GET":
+        provincia = request.GET['value']
+        if provincia == "":
+            return render_to_response("facturacion/carga_cantones.html",context_instance=RequestContext(request))
+        cantones = Canton.objects.filter(provincia=provincia)
+        ctx = {"cantones":cantones}
+        return render_to_response("facturacion/carga_cantones.html",ctx,context_instance=RequestContext(request))
     
     
     
