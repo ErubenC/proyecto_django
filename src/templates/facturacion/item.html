@@ -3,23 +3,31 @@
 {% block script %}
 
 <script>
-
+var marcas="";
+var unidades="";
+var grupos="";
 
 
   $(function() {
   	
   
-    var marcas = '{{marcas}}';
+    marcas = '{{marcas}}';
     marcas=marcas.replace(/\&quot;/g, '"')
     marcas=marcas.split(",");
     
-    var unidades = '{{unidades}}';
+    //[{ value: 'Andorra', data: 'AD' },{ value: 'Zimbabwe', data: 'ZZ' }]
+    
+    unidades = '{{unidades}}';
     unidades=unidades.replace(/\&quot;/g, '"')
     unidades=unidades.split(",");
     
-    var grupos = '{{grupos}}';
+    grupos = '{{grupos}}';
     grupos=grupos.replace(/\&quot;/g, '"')
     grupos=grupos.split(",");
+    
+    bodegas = '{{bodegas}}';
+    bodegas=bodegas.replace(/\&quot;/g, '"')
+    bodegas=bodegas.split(",");
     
     
     $( "#id_marca" ).autocomplete({
@@ -34,6 +42,18 @@
       source: grupos
     });
     
+<<<<<<< HEAD
+=======
+    $( "#id_bodega" ).autocomplete({
+      source: bodegas
+    });
+    
+
+    
+    
+    
+    
+>>>>>>> 2ea4dee27c21315daefbace43bcdc8972efb351e
     
   });
   </script>
@@ -42,7 +62,7 @@
 
 <br> <h2>Agregar Item</h2>
 
-<form action="." method="POST">
+<form action="." method="POST" id="formulario">
 
 	{% csrf_token %}
 	{{ mensaje }}
