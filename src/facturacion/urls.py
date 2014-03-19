@@ -12,5 +12,6 @@ urlpatterns = patterns('',
     url(r'^unidad/$',  views.unidad_view, name='vista_unidad'),
     url(r'^item/$',  views.item_view, name='vista_item'),
     url(r'^proveedores/$',  views.proveedores_view, name='vista_proveedores'),
+    url(r'^clientes/$',  views.clientes_view, name='vista_clientes'),
     
 )
