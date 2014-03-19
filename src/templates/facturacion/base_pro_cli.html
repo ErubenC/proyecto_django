@@ -4,26 +4,23 @@
     <title> {% block title %} Titulo Base {% endblock %}</title>
     {% block css %}
     <link rel="stylesheet" href="/media/css/jquery-ui.css" />
-        <link rel="stylesheet" href="/media/css/bootstrap.css" />
+    <link rel="stylesheet" href="/media/css/bootstrap.css" />
     {% endblock css %}
     {% block js %}
 	  <script src="/media/js/jquery-1.9.1.js"></script>
 	  <script src="/media/js/jquery-ui.js"></script>
-	      <script src="/media/js/bootstrap.js"></script>
+	  <script src="/media/js/bootstrap.js"></script>
     {% endblock js %}
     {% block script %}
     {% endblock script %}
 </head>
 <body>
 <header>
-<h1>Manejo de Items</h1>
+<h1>Manejo de Clientes y Proveedores</h1>
 <nav class="navbar navbar-default" role="navigation">
 <ul class="nav navbar-nav">
-	<li><a href="{% url 'vista_marca' %}"> Agregar marca </a> </li>
-	<li><a href="{% url 'vista_grupo' %}"> Agregar grupos </a> </li>
-	<li><a href="{% url 'vista_bodega' %}"> Agregar bodegas </a> </li>
-	<li><a href="{% url 'vista_unidad' %}"> Agregar Unidades </a></li> 
-	<li><a href="{% url 'vista_item' %}"> Agregar Items </a> </li>
+	<li><a href="{% url 'vista_proveedores' %}"> Agregar proveedores </a> </li>
+	<li><a href="{% url 'vista_clientes' %}"> Agregar clientes </a> </li>
 	<li><a href="{% url 'vista_index' %}"> Principal </a></li>
 	</ul>
 </nav>
