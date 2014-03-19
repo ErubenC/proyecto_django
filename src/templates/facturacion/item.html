@@ -4,47 +4,10 @@
 
 <script>
 var marcas="";
-var unidades="";
-var grupos="";
 
 
   $(function() {
   	
-  
-    marcas = '{{marcas}}';
-    marcas=marcas.replace(/\&quot;/g, '"')
-    marcas=marcas.split(",");
-    
-    //[{ value: 'Andorra', data: 'AD' },{ value: 'Zimbabwe', data: 'ZZ' }]
-    
-    unidades = '{{unidades}}';
-    unidades=unidades.replace(/\&quot;/g, '"')
-    unidades=unidades.split(",");
-    
-    grupos = '{{grupos}}';
-    grupos=grupos.replace(/\&quot;/g, '"')
-    grupos=grupos.split(",");
-    
-    bodegas = '{{bodegas}}';
-    bodegas=bodegas.replace(/\&quot;/g, '"')
-    bodegas=bodegas.split(",");
-    
-    
-    $( "#id_marca" ).autocomplete({
-    	source: marcas
-        });
-    
-    $( "#id_unidad" ).autocomplete({
-      source: unidades
-    });
-    
-    $( "#id_grupo" ).autocomplete({
-      source: grupos
-    });
-
-    $( "#id_bodega" ).autocomplete({
-      source: bodegas
-    });
    
   });
   </script>
