@@ -40,6 +40,9 @@ class Item(models.Model):
     id_unidad       = models.ForeignKey(Unidad)
     item_bodega     = models.ManyToManyField(Bodega)
     
+    def __str__(self):              # __unicode__ on Python 2
+        return self.descripcion
+    
     
 
    

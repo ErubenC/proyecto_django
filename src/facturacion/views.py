@@ -135,27 +135,21 @@ def item_view(request):
                 u.es_servicio = True
             u.iva = form.cleaned_data['iva']
             u.ubicacion = form.cleaned_data['ubicacion']
-            
-            cp = form.cleaned_data['marca'].split("(")[1].split(")")[0]
-            u.id_marca = Marca.objects.filter(codigo_propio=cp).first()
-            
-            cp = form.cleaned_data['grupo'].split("(")[1].split(")")[0]
-            u.id_grupo = GrupoItem.objects.filter(codigo_propio=cp).first()
-            
-            cp = form.cleaned_data['unidad'].split("(")[1].split(")")[0]
-            u.id_unidad = Unidad.objects.filter(codigo_propio=cp).first()
+            u.id_marca =form.cleaned_data['marca']
+            u.id_unidad = form.cleaned_data['unidad']
+            u.id_grupo = form.cleaned_data['grupo']
             
             u.save()
             
             if(form.cleaned_data['bodega']!=""):
-                cp = form.cleaned_data['bodega'].split("(")[1].split(")")[0]
-                bod = Bodega.objects.filter(codigo_propio=cp).first()
+                bod = form.cleaned_data['bodega']
                 u.item_bodega.add(bod)
             
             mensaje = "Se agrego satisfactoriamente."
+            form = ItemForm()
         else:
             mensaje = "Llene correctamente los campos."
-        form = ItemForm()
+        
         ctx = {"form":form,"mensaje":mensaje,"marcas":marcas,"unidades":unidades,"grupos":grupos,"bodegas":bodegas}
         return render_to_response("facturacion/item.html",ctx,context_instance=RequestContext(request))
     else:

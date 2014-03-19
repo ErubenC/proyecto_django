@@ -46,38 +46,7 @@ var grupos="";
       source: bodegas
     });
     
-    
-    
-    $("#formulario").submit(function(e){
 
-         dataString = $("#formulario").serialize();
-         $("#id_marca").val()
-         mensaje = "";
-         if(marcas.indexOf($("#id_marca").val())==(marcas.length-1)
-         	||marcas.indexOf($("#id_marca").val())==-1)
-         	mensaje=mensaje+'seleccione una Marca existente\n';
-         
-         if(unidades.indexOf($("#id_unidad").val())==(unidades.length-1)
-         	||unidades.indexOf($("#id_unidad").val())==-1)
-         	mensaje=mensaje+'seleccione una Unidad existente\n';
-         
-         if(grupos.indexOf($("#id_grupo").val())==(grupos.length-1)
-         	||grupos.indexOf($("#id_grupo").val())==-1)
-         	mensaje=mensaje+'seleccione un Grupo existente\n';
-         	
-         if(bodegas.indexOf($("#id_bodega").val())==-1)
-         	mensaje=mensaje+'seleccione una Bodega existente\n';
-         	
-         if(mensaje!=""){
-         		alert(mensaje);
-         		return false;
-         	}
-	 	$.post('/item', $('#formulario').serialize())
-         //return false;  //stop the actual form post !important!
- 
-      });
-    
-    
     
     
     
