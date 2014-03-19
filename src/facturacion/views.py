@@ -7,16 +7,6 @@ from facturacion.models import Marca, GrupoItem, Bodega, Unidad, Item
 from django.contrib.auth.decorators import login_required, user_passes_test
 from pcardext import cp
 
-
-def not_in_facturacion_group(user):
-    if user:
-        x = user.groups.filter(name='facturacion').count() == 1
-        print x
-        return x
-    return False
-
-@login_required
-@user_passes_test(not_in_facturacion_group, login_url='/login')
 def facturacion_view(request):
     return render_to_response("facturacion/base.html", context_instance=RequestContext(request))
 
