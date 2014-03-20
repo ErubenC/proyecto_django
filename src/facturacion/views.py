@@ -2,8 +2,9 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from facturacion.forms import MarcaForm,BodegaForm,UnidadForm,GrupoForm,\
-    ItemForm
-from facturacion.models import Marca, GrupoItem, Bodega, Unidad, Item
+    ItemForm, TransaccionForm
+from facturacion.models import Marca, GrupoItem, Bodega, Unidad, Item,\
+    Transaccion
 from django.contrib.auth.decorators import login_required, user_passes_test
 from pcardext import cp
 
@@ -133,3 +134,26 @@ def item_view(request):
         ctx = {"form":form}
         return render_to_response("facturacion/item.html",ctx,context_instance=RequestContext(request))
    
+
+def transaccion_view(request):
+    mensaje = ""
+    if request.method == "POST":
+        form = TransaccionForm(request.POST)
+        if form.is_valid():
+            t = Transaccion()
+            t.codigo = form.cleaned_data['codigo']
+            t.descripcion = form.cleaned_data['descripcion']
+            t.tabs = form.cleaned_data['tabs']
+            t.save()
+            mensaje = "Se agrego satisfactoriamente."
+            form = TransaccionForm()
+        else:
+            mensaje = "Llene correctamente los campos."
+        ctx = {"form":form,"mensaje":mensaje}
+        return render_to_response("facturacion/transaccion.html",ctx,context_instance=RequestContext(request))
+    else:
+        form = TransaccionForm()
+        ctx = {"form":form}
+        return render_to_response("facturacion/transaccion.html",ctx,context_instance=RequestContext(request))
+    
+

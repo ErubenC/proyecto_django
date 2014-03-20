@@ -3,6 +3,7 @@ from django.db import models
 '''
 Estas clases pertenecen al modelo para agregar marcas, bodegas, grupos e items
 '''
+from django.template.defaultfilters import default
 
 class Marca(models.Model):
     nombre  =   models.CharField(max_length=50)
@@ -86,6 +87,39 @@ class Cliente(models.Model):
     canton = models.ForeignKey(Canton)
     
 
+'''
+Estas clases pertenecen al modelo que nos permite manipular ingresos y egresos, y
+ las caracteristicas de los diferentes documentos que se vallan crenado
+'''
+    
+class Transaccion(models.Model):
+    codigo = models.BigIntegerField(unique=True)
+    descripcion = models.CharField(max_length=60)
+    tabs = models.CharField(max_length=10)
+    
+class Grupo_doc(models.Model):
+    codigo = models.BigIntegerField(unique=True)
+    descripcion = models.CharField(max_length=60)
+    tabs = models.CharField(max_length=10)
+    
+class Rubro_cancelacion(models.Model):
+    codigo = models.BigIntegerField(unique=True)
+    descripcion = models.CharField(max_length=60)
+    tabs = models.CharField(max_length=10)
+    
+class Documento(models.Model):
+    codigo = models.BigIntegerField(unique=True)
+    descripcion = models.CharField(max_length=60)
+    tabs = models.CharField(max_length=10)
+    iva = models.BooleanField(default=True)
+    con_precio = models.BooleanField(default=True)
+    con_items = models.BooleanField(default=True)
+    transaccion = models.ForeignKey(Transaccion)
+    grupo_doc = models.ForeignKey(Grupo_doc)
+    rubro_cancelacion = models.ForeignKey(Rubro_cancelacion)
+    
+                                    
+                                     
     
 
     

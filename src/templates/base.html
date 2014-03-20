@@ -25,8 +25,9 @@
 	<a class="dropdown-toggle" data-toggle="dropdown" href="#">Facturacion <b class="caret"></b></a>
 		<ul class="dropdown-menu " role="menu" >
 			<li><a href="{% url 'vista_facturacion' %}">Manejo de items</a></li>
+			<li><a href="{% url 'vista_proveedores' %}">Manejo de proveedores y clientes</a></li>
 			<li class="divider"></li>
-			<li><a href="#">Documentos</a></li>
+			<li><a href="{% url 'vista_config_documentos' %}">Configurar Documentos</a></li>
             <li><a href="#">Grupos de documentos</a></li>
         </ul>
 	</li>

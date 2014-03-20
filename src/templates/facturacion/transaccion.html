@@ -1,0 +1,17 @@
+{% extends 'facturacion/base_config_doc.html' %}
+{% block title %} Tipos de transacciones {% endblock %}
+{% block content %}
+<br> <h2>Agregar tipo de transaccion</h2>
+
+<form action="." method="POST">
+
+	{% csrf_token %}
+	<h3>{{ mensaje }}</h3>
+	{{ form.as_p }}
+	<input type="submit" value="Agregar">
+	<input type="reset" value="Limpiar">
+
+</form>
+
+
+{% endblock %}
