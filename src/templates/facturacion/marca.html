@@ -1,5 +1,13 @@
 {% extends 'facturacion/base.html' %}
 {% block title %} Agregar Marca {% endblock %}
+{% block script %}
+	//$(document).ready(function() 	{
+	//window.addEventListener('load', function (e){ 
+	
+	$(function() {
+		$("#tabla").load("/lista_marcas/");	
+	});
+{% endblock script %}
 {% block content %}
 <br> <h2>Agregar Marca</h2>
 
@@ -10,8 +18,11 @@
 	{{ form.as_p }}
 	<input type="submit" value="Agregar">
 	<input type="reset" value="Limpiar">
+	<input type="button" value="magia" id = "magia">
 
 </form>
+
+<div id="tabla"></div>
 
 
 {% endblock %}

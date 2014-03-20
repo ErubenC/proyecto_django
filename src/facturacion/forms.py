@@ -1,5 +1,7 @@
 from django import forms
-from facturacion.models import Marca, GrupoItem, Unidad, Bodega, Transaccion, Grupo_doc, Rubro_cancelacion
+from facturacion.models import Marca, GrupoItem, Unidad, Canton, Provincia, \
+Bodega, Transaccion, Grupo_doc, Rubro_cancelacion
+
 
 class MarcaForm(forms.Form):
     nombre = forms.CharField(widget=forms.TextInput())
@@ -30,63 +32,36 @@ class ItemForm(forms.Form):
     Bien_o_Servicio = forms.CharField(max_length=30,widget=forms.Select(choices=BIEN_SERVICIO))
     iva = forms.BooleanField(required=False)
     ubicacion = forms.CharField(widget=forms.TextInput())
-    marca = forms.ModelChoiceField(queryset=Marca.objects.order_by('nombre'))
-    grupo = forms.ModelChoiceField(queryset=GrupoItem.objects.order_by('nombre'))
-    unidad = forms.ModelChoiceField(queryset=Unidad.objects.order_by('nombre'))
-    bodega = forms.ModelChoiceField(queryset=Bodega.objects.order_by('nombre'),required=False)
+    marca = forms.ModelChoiceField(queryset=Marca.objects.all())
+    grupo = forms.ModelChoiceField(queryset=GrupoItem.objects.all())
+    unidad = forms.ModelChoiceField(queryset=Unidad.objects.all())
+    bodega = forms.ModelChoiceField(queryset=Bodega.objects.all(),required=False)
     
-'''   def clean_marca(self):
-        if "(" in self.cleaned_data['marca']:
-            marca = self.cleaned_data['marca'].split("(")[1]
-            if ")" in marca:
-                marca = marca.split(")")[0]                
-                try:
-                    Marca.objects.get(codigo_propio=marca)
-                except Marca.DoesNotExist:
-                    raise forms.ValidationError('Marca no existe')
-                return marca
-        raise forms.ValidationError('Marca no existe')
-    
-    def clean_unidad(self):
-        if "(" in self.cleaned_data['unidad']:
-            unidad = self.cleaned_data['unidad'].split("(")[1]
-            if ")" in unidad:
-                unidad = unidad.split(")")[0]                
-                try:
-                    Unidad.objects.get(codigo_propio=unidad)
-                except Unidad.DoesNotExist:
-                    raise forms.ValidationError('Unidad no existe')
-                print unidad
-                return unidad
-        raise forms.ValidationError('Unidad no existe')
-    
-    def clean_grupo(self):
-        if "(" in self.cleaned_data['grupo']:
-            grupo = self.cleaned_data['grupo'].split("(")[1]
-            if ")" in grupo:
-                grupo = grupo.split(")")[0]                
-                try:
-                    GrupoItem.objects.get(codigo_propio=grupo)
-                except GrupoItem.DoesNotExist:
-                    raise forms.ValidationError('Grupo no existe')
-                return grupo
-        raise forms.ValidationError('Grupo no existe')
-    
-    def clean_bodega(self):
-        if "(" in self.cleaned_data['bodega']:
-            bodega = self.cleaned_data['bodega'].split("(")[1]
-            if ")" in bodega:
-                bodega = bodega.split(")")[0]                
-                try:
-                    Bodega.objects.get(codigo_propio=bodega)
-                except Bodega.DoesNotExist:
-                    raise forms.ValidationError('Bodega no existe')
-                return bodega
-        raise forms.ValidationError('Bodega no existe')
-    
-'''   
 
-BIEN_SERVICIO = (('Bien', 'Bien'), ('Servicio', 'Servicio'))  
+class ProveedoresForm(forms.Form):
+    nombre_comercial = forms.CharField(widget=forms.TextInput())
+    codigo_propio = forms.CharField(widget=forms.TextInput())
+    razon_social = forms.CharField(widget=forms.TextInput())
+    ruc = forms.CharField(widget=forms.TextInput())
+    direccion = forms.CharField(widget=forms.TextInput())
+    provincia = forms.ModelChoiceField(queryset=Provincia.objects.all())
+    canton = forms.ModelChoiceField(queryset=Canton.objects.all())
+    email = forms.EmailField(label='Correo',widget=forms.TextInput(),required=False)
+    telefono = forms.CharField(widget=forms.TextInput(),required=False)
+    fax = forms.CharField(widget=forms.TextInput(),required=False)
+    
+class ClientesForm(forms.Form):
+    nombre_comercial = forms.CharField(widget=forms.TextInput())
+    codigo_propio = forms.CharField(widget=forms.TextInput())
+    razon_social = forms.CharField(widget=forms.TextInput())
+    ruc = forms.CharField(widget=forms.TextInput())
+    direccion = forms.CharField(widget=forms.TextInput())
+    provincia = forms.ModelChoiceField(queryset=Provincia.objects.all())
+    canton = forms.ModelChoiceField(queryset=Canton.objects.all())
+    email = forms.EmailField(label='Correo',widget=forms.TextInput(),required=False)
+    telefono = forms.CharField(widget=forms.TextInput(),required=False)
+    fax = forms.CharField(widget=forms.TextInput(),required=False)
+    
 
 class CrearDocumentoForm(forms.Form):
     codigo_propio = forms.CharField(widget=forms.TextInput())
@@ -114,3 +89,4 @@ class RubroCancelacionForm(forms.Form):
     descripcion = forms.CharField(widget=forms.TextInput())
     tabs = forms.CharField(widget=forms.TextInput())
     
+

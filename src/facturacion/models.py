@@ -10,12 +10,16 @@ class Marca(models.Model):
     codigo_propio   =   models.CharField(max_length=50)
     def __str__(self):              # __unicode__ on Python 2
         return self.nombre
+    class Meta:
+        ordering = ['nombre']
     
 class GrupoItem(models.Model):
     nombre  =   models.CharField(max_length=50)
     codigo_propio   =   models.CharField(max_length=50)
     def __str__(self):              # __unicode__ on Python 2
         return self.nombre
+    class Meta:
+        ordering = ['nombre']
     
 class Unidad(models.Model):
     nombre = models.CharField(max_length=30)
@@ -23,6 +27,8 @@ class Unidad(models.Model):
     descripcion = models.CharField(max_length=200)
     def __str__(self):              # __unicode__ on Python 2
         return self.nombre
+    class Meta:
+        ordering = ['nombre']
     
 class Bodega(models.Model):
     nombre  = models.CharField(max_length=50)
@@ -30,6 +36,8 @@ class Bodega(models.Model):
     direccion   = models.CharField(max_length=50)
     def __str__(self):              # __unicode__ on Python 2
         return self.nombre
+    class Meta:
+        ordering = ['nombre']
 
 class Item(models.Model):
     codigo_barras   = models.CharField(max_length=50)
@@ -56,11 +64,19 @@ tambien estan incluidas las tablas que contiene las ciudades y las provincias
 class Provincia(models.Model):
     nombre = models.CharField(max_length=40)
     codigo_propio   = models.CharField(max_length=30)
+    def __str__(self):              # __unicode__ on Python 2
+        return self.nombre
+    class Meta:
+        ordering = ['nombre']
     
 class Canton(models.Model):
     nombre = models.CharField(max_length=40)
     codigo_propio   = models.CharField(max_length=30)
     provincia       = models.ForeignKey(Provincia)
+    def __str__(self):              # __unicode__ on Python 2
+        return self.nombre
+    class Meta:
+        ordering = ['nombre']
 
 class Proveedor(models.Model):
     nombre_comercial = models.CharField(max_length=50)
@@ -73,6 +89,8 @@ class Proveedor(models.Model):
     telefono = models.CharField(max_length=30)
     fax = models.CharField(max_length=30)
     canton = models.ForeignKey(Canton)
+    def __str__(self):              # __unicode__ on Python 2
+        return self.razon_social
     
 class Cliente(models.Model):
     nombre_comercial = models.CharField(max_length=50)
@@ -85,6 +103,8 @@ class Cliente(models.Model):
     telefono = models.CharField(max_length=30)
     fax = models.CharField(max_length=30)
     canton = models.ForeignKey(Canton)
+    def __str__(self):              # __unicode__ on Python 2
+        return self.razon_social
     
 
 '''

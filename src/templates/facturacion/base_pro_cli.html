@@ -11,8 +11,59 @@
 	  <script src="/media/js/jquery-ui.js"></script>
 	  <script src="/media/js/bootstrap.js"></script>
     {% endblock js %}
+    <script>
+
+		  $(function() {
+		  
+			  ///////////////////////////////////////////////////////////
+			  //para manejar lo que carga en el select canton
+			  	$("#id_provincia").change(function(e){
+				    $.get("{% url 'vista_carga_cantones' %}", {value: $('#id_provincia').val()}, function(data){
+			        $('#id_canton').html(data);
+			        if($('#id_provincia').val()=="")
+			        	$("#id_canton").prop('disabled', true);
+			        else $("#id_canton").prop('disabled', false);
+			        });
+			  	});   
+			  	//////////////////////////////////////////////////////////	
+			  	
+			  	
+			  	
+			 //////////////////////////////////////////////////////////////////// 	
+	      	//deshabilitar el select de canton si no selecciona provincia
+			if($('#id_provincia').val()=="")
+				$("#id_canton").prop('disabled', true);
+			////////////////////////////////////////////////////////////////////
+			
+			
+			////////////////////////////////////////////////////////////////////
+			//ruc solo acepte numero	
+			$("#id_ruc").keydown(function (e) {
+		        // Allow: backspace, delete, tab, escape and enter
+		        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13]) !== -1 ||
+		             // Allow: Ctrl+A
+		            (e.keyCode == 65 && e.ctrlKey === true) || 
+		             // Allow: home, end, left, right
+		            (e.keyCode >= 35 && e.keyCode <= 39)) {
+		                 // let it happen, don't do anything
+		                 return;
+		        }
+		        // Ensure that it is a number and stop the keypress
+		        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+		            e.preventDefault();
+		        }
+			        
+		        
+		    });
+		    /////////////////////////////////////////////////////////////////////////
+				  	
+			  	
+		  	
+		});
+    
     {% block script %}
     {% endblock script %}
+    </script>
 </head>
 <body>
 <header>

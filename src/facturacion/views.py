@@ -2,11 +2,13 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from facturacion.forms import MarcaForm,BodegaForm,UnidadForm,GrupoForm,\
-    ItemForm, TransaccionForm
-from facturacion.models import Marca, GrupoItem, Bodega, Unidad, Item,\
-    Transaccion
+   TransaccionForm, ItemForm, ProveedoresForm, ClientesForm
+from facturacion.models import Marca, GrupoItem, Bodega, Unidad, Item, Proveedor,\
+    Cliente, Canton, Transaccion
+
 from django.contrib.auth.decorators import login_required, user_passes_test
 from pcardext import cp
+from django.views.generic.list import ListView
 
 def facturacion_view(request):
     return render_to_response("facturacion/base.html", context_instance=RequestContext(request))
@@ -96,7 +98,6 @@ def unidad_view(request):
    
 def item_view(request):
     mensaje = ""
-
     if request.method == "POST":
         form = ItemForm(request.POST)
         if form.is_valid():
@@ -157,3 +158,82 @@ def transaccion_view(request):
         return render_to_response("facturacion/transaccion.html",ctx,context_instance=RequestContext(request))
     
 
+def clientes_view(request):
+    
+    mensaje = ""
+    if request.method == "POST":
+        form = ClientesForm(request.POST)
+        if form.is_valid():
+            u = Cliente()
+            u.nombre_comercial = form.cleaned_data['nombre_comercial']
+            u.codigo_propio = form.cleaned_data['codigo_propio']
+            u.razon_social = form.cleaned_data['razon_social']
+            u.ruc = form.cleaned_data['ruc']
+            u.direccion = form.cleaned_data['direccion']
+            u.canton = form.cleaned_data['canton']
+            u.mail = form.cleaned_data['email']
+            u.telefono = form.cleaned_data['telefono']
+            u.fax = form.cleaned_data['fax']
+            u.save()
+            
+            mensaje = "Se agrego satisfactoriamente."
+            form = ClientesForm()
+        else:
+            mensaje = "Llene correctamente los campos."
+        
+        ctx = {"form":form,"mensaje":mensaje}
+        return render_to_response("facturacion/cliente.html",ctx,context_instance=RequestContext(request))
+    else:
+        form = ClientesForm()
+        ctx = {"form":form}
+        return render_to_response("facturacion/cliente.html",ctx,context_instance=RequestContext(request))
+    
+    
+    
+       
+def proveedores_view(request):
+    
+    mensaje = ""
+    if request.method == "POST":
+        form = ProveedoresForm(request.POST)
+        if form.is_valid():
+            u = Proveedor()
+            u.nombre_comercial = form.cleaned_data['nombre_comercial']
+            u.codigo_propio = form.cleaned_data['codigo_propio']
+            u.razon_social = form.cleaned_data['razon_social']
+            u.ruc = form.cleaned_data['ruc']
+            u.direccion = form.cleaned_data['direccion']
+            u.canton = form.cleaned_data['canton']
+            u.mail = form.cleaned_data['email']
+            u.telefono = form.cleaned_data['telefono']
+            u.fax = form.cleaned_data['fax']
+            u.save()
+            
+            mensaje = "Se agrego satisfactoriamente."
+            form = ProveedoresForm()
+        else:
+            mensaje = "Llene correctamente los campos."
+        
+        ctx = {"form":form,"mensaje":mensaje}
+        return render_to_response("facturacion/proveedor.html",ctx,context_instance=RequestContext(request))
+    else:
+        form = ProveedoresForm()
+        ctx = {"form":form}
+        return render_to_response("facturacion/proveedor.html",ctx,context_instance=RequestContext(request))
+    
+    
+def carga_cantones_view(request):
+    if request.method == "GET":
+        provincia = request.GET['value']
+        if provincia == "":
+            return render_to_response("facturacion/carga_cantones.html",context_instance=RequestContext(request))
+        cantones = Canton.objects.filter(provincia=provincia)
+        ctx = {"cantones":cantones}
+        return render_to_response("facturacion/carga_cantones.html",ctx,context_instance=RequestContext(request))
+    
+class IndexView(ListView):
+    model = Marca
+    paginate_by = 5
+    queryset = Marca.objects.all()
+    
+    

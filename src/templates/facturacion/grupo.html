@@ -1,5 +1,13 @@
 {% extends 'facturacion/base.html' %}
 {% block title %} Agregar Grupo {% endblock %}
+{% block script %}
+	//$(document).ready(function() 	{
+	//window.addEventListener('load', function (e){ 
+	
+	$(function() {
+		$("#tabla").load("/lista_grupos/");	
+	});
+{% endblock script %}
 {% block content %}
 <br> <h2>Agregar Grupo</h2>
 
@@ -12,6 +20,9 @@
 	<input type="reset" value="Limpiar">
 
 </form>
+
+
+<div id="tabla"></div>
 
 
 {% endblock %}

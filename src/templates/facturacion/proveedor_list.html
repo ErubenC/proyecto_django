@@ -1,0 +1,33 @@
+
+{% if object_list %}
+<table border="9" >
+	<caption><b><font size="6">Proveedores</font></b></caption>
+	<tr>
+		<th scope="col">Nombre Comercial</th>
+		<th scope="col">Codigo Propio</th>
+		<th scope="col">Razon Social</th>
+		<th scope="col">Ruc</th>
+		<th scope="col">Direccion</th>
+		<th scope="col">Canton</th>
+		<th scope="col">Correo</th>
+		<th scope="col">Telefono</th>
+		<th scope="col">Fax</th>
+	</tr>
+    {% for proveedor in object_list %}
+    <tr>
+		<td>{{ proveedor.nombre_comercial }}</td>
+		<td>{{ proveedor.codigo_propio }}</td>
+		<td>{{ proveedor.razon_social }}</td>
+		<td>{{ proveedor.ruc }}</td>
+		<td>{{ proveedor.direccion }}</td>
+		<td>{{ proveedor.canton }}</td>
+		<td>{{ proveedor.mail }}</td>
+		<td>{{ proveedor.telefono }}</td>
+		<td>{{ proveedor.fax }}</td>
+	</tr>
+    {% endfor %}
+</table>
+{% else %}
+	<h3>No existen proveedores.</h3>
+{% endif %}
+

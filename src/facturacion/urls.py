@@ -1,5 +1,8 @@
 from django.conf.urls import patterns, url
 from facturacion import views
+from django.views.generic import ListView
+from facturacion.models import Proveedor, Marca, Unidad, GrupoItem, Bodega
+from facturacion.views import IndexView
 
 urlpatterns = patterns('',
     # Examples:
@@ -11,6 +14,18 @@ urlpatterns = patterns('',
     url(r'^grupo/$',  views.grupo_view, name='vista_grupo'),
     url(r'^unidad/$',  views.unidad_view, name='vista_unidad'),
     url(r'^item/$',  views.item_view, name='vista_item'),
+<<<<<<< HEAD
     url(r'^cofig_documentos/$',  views.transaccion_view, name='vista_config_documentos'),
+=======
+    url(r'^proveedores/$',  views.proveedores_view, name='vista_proveedores'),
+    url(r'^clientes/$',  views.clientes_view, name='vista_clientes'),
+    url(r'^carga_cantones/$',  views.carga_cantones_view, name='vista_carga_cantones'),
+    (r'^lista_proveedores/$', ListView.as_view(model=Proveedor,)),
+    #(r'^lista_marcas/$', ListView.as_view(model=Marca,)),
+    (r'^lista_marcas(?P<pagina>.*)/$', IndexView.as_view()),
+    (r'^lista_grupos/$', ListView.as_view(model=GrupoItem,)),
+    (r'^lista_unidades/$', ListView.as_view(model=Unidad,)),
+    (r'^lista_bodegas/$', ListView.as_view(model=Bodega,)),
+>>>>>>> 49aef84c2f2d9ae78aa64bce84846a9cfa812703
     
 )
