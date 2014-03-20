@@ -14,9 +14,7 @@ urlpatterns = patterns('',
     url(r'^grupo/$',  views.grupo_view, name='vista_grupo'),
     url(r'^unidad/$',  views.unidad_view, name='vista_unidad'),
     url(r'^item/$',  views.item_view, name='vista_item'),
-<<<<<<< HEAD
     url(r'^cofig_documentos/$',  views.transaccion_view, name='vista_config_documentos'),
-=======
     url(r'^proveedores/$',  views.proveedores_view, name='vista_proveedores'),
     url(r'^clientes/$',  views.clientes_view, name='vista_clientes'),
     url(r'^carga_cantones/$',  views.carga_cantones_view, name='vista_carga_cantones'),
@@ -26,6 +24,5 @@ urlpatterns = patterns('',
     (r'^lista_grupos/$', ListView.as_view(model=GrupoItem,)),
     (r'^lista_unidades/$', ListView.as_view(model=Unidad,)),
     (r'^lista_bodegas/$', ListView.as_view(model=Bodega,)),
->>>>>>> 49aef84c2f2d9ae78aa64bce84846a9cfa812703
     
 )
