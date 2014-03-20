@@ -7,6 +7,7 @@ from facturacion.models import Marca, GrupoItem, Bodega, Unidad, Item, Proveedor
     Cliente, Canton
 from django.contrib.auth.decorators import login_required, user_passes_test
 from pcardext import cp
+from django.views.generic.list import ListView
 
 def facturacion_view(request):
     return render_to_response("facturacion/base.html", context_instance=RequestContext(request))
@@ -206,5 +207,9 @@ def carga_cantones_view(request):
         ctx = {"cantones":cantones}
         return render_to_response("facturacion/carga_cantones.html",ctx,context_instance=RequestContext(request))
     
+class IndexView(ListView):
+    model = Marca
+    paginate_by = 5
+    queryset = Marca.objects.all()
     
     

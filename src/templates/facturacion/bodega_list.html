@@ -1,0 +1,21 @@
+
+{% if object_list %}
+<table border="9" >
+	<caption><b><font size="6">Bodegas</font></b></caption>
+	<tr>
+		<th scope="col">Nombre</th>
+		<th scope="col">Codigo Propio</th>
+		<th scope="col">Direccion</th>
+	</tr>
+    {% for proveedor in object_list %}
+    <tr>
+		<td>{{ proveedor.nombre }}</td>
+		<td>{{ proveedor.codigo_propio }}</td>
+		<td>{{ proveedor.direccion }}</td>
+	</tr>
+    {% endfor %}
+</table>
+{% else %}
+	<h3>No existen bodegas.</h3>
+{% endif %}
+

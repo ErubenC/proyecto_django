@@ -1,5 +1,13 @@
 {% extends 'facturacion/base.html' %}
 {% block title %} Agregar Bodega {% endblock %}
+{% block script %}
+	//$(document).ready(function() 	{
+	//window.addEventListener('load', function (e){ 
+	
+	$(function() {
+		$("#tabla").load("/lista_bodegas/");	
+	});
+{% endblock script %}
 {% block content %}
 <br> <h2>Agregar Bodega</h2>
 
@@ -13,5 +21,7 @@
 
 </form>
 
+
+<div id="tabla"></div>
 
 {% endblock %}
