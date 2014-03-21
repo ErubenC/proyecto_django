@@ -340,8 +340,72 @@ def editar_item_view(request):
         ctx = {"form":form,"mensaje":mensaje,"pk":pk}
         return render_to_response("facturacion/editar.html",ctx,context_instance=RequestContext(request))
    
-            
-            
-        
     
-    
+  
+def editar_proveedor_view(request):
+    if request.method == "GET":
+        pk = request.GET['pk']
+        proveedor = Proveedor.objects.filter(pk=pk).first()
+        form = ProveedoresForm({"nombre_comercial":proveedor.nombre_comercial,"codigo_propio":proveedor.codigo_propio,
+                         "razon_social":proveedor.razon_social,
+                         "ruc":proveedor.ruc,"direccion":proveedor.direccion,
+                         "provincia":proveedor.canton.provincia.pk,"canton":proveedor.canton.pk,
+                         "email":proveedor.mail,"telefono":proveedor.telefono,"fax":proveedor.fax});
+        ctx = {"form":form,"pk":pk}
+        return render_to_response("facturacion/editar.html",ctx, context_instance=RequestContext(request))
+    if request.method == "POST":
+        pk = request.POST['cod']
+        proveedor = Proveedor.objects.filter(pk=pk).first()
+        form = ProveedoresForm(request.POST)
+        if form.is_valid():
+            proveedor.nombre_comercial = form.cleaned_data['nombre_comercial']
+            proveedor.codigo_propio = form.cleaned_data['codigo_propio']
+            proveedor.razon_social = form.cleaned_data['razon_social']
+            proveedor.ruc = form.cleaned_data['ruc']
+            proveedor.direccion = form.cleaned_data['direccion']
+            proveedor.canton = form.cleaned_data['canton']
+            proveedor.mail = form.cleaned_data['email']
+            proveedor.telefono = form.cleaned_data['telefono']
+            proveedor.fax = form.cleaned_data['fax']
+            proveedor.save()
+            mensaje = "Correcto"
+            form = ProveedoresForm()
+        else:
+            mensaje = "Llene correctamente los campos."
+        ctx = {"form":form,"mensaje":mensaje,"pk":pk}
+        return render_to_response("facturacion/editar.html",ctx,context_instance=RequestContext(request))
+   
+  
+def editar_cliente_view(request):
+    if request.method == "GET":
+        pk = request.GET['pk']
+        cliente = Cliente.objects.filter(pk=pk).first()
+        form = ClientesForm({"nombre_comercial":cliente.nombre_comercial,"codigo_propio":cliente.codigo_propio,
+                         "razon_social":cliente.razon_social,
+                         "ruc":cliente.ruc,"direccion":cliente.direccion,
+                         "provincia":cliente.canton.provincia.pk,"canton":cliente.canton.pk,
+                         "email":cliente.mail,"telefono":cliente.telefono,"fax":cliente.fax});
+        ctx = {"form":form,"pk":pk}
+        return render_to_response("facturacion/editar.html",ctx, context_instance=RequestContext(request))
+    if request.method == "POST":
+        pk = request.POST['cod']
+        cliente = Cliente.objects.filter(pk=pk).first()
+        form = ClientesForm(request.POST)
+        if form.is_valid():
+            cliente.nombre_comercial = form.cleaned_data['nombre_comercial']
+            cliente.codigo_propio = form.cleaned_data['codigo_propio']
+            cliente.razon_social = form.cleaned_data['razon_social']
+            cliente.ruc = form.cleaned_data['ruc']
+            cliente.direccion = form.cleaned_data['direccion']
+            cliente.canton = form.cleaned_data['canton']
+            cliente.mail = form.cleaned_data['email']
+            cliente.telefono = form.cleaned_data['telefono']
+            cliente.fax = form.cleaned_data['fax']
+            cliente.save()
+            mensaje = "Correcto"
+            form = ClientesForm()
+        else:
+            mensaje = "Llene correctamente los campos."
+        ctx = {"form":form,"mensaje":mensaje,"pk":pk}
+        return render_to_response("facturacion/editar.html",ctx,context_instance=RequestContext(request))
+ 

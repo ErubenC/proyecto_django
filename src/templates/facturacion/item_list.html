@@ -29,7 +29,7 @@
 {% block content %}
 {% if object_list %}
 <table border="9" >
-	<caption><b><font size="6">Grupos</font></b></caption>
+	<caption><b><font size="6">Items</font></b></caption>
 	<tr>
 		<th scope="col">Codigo Propio</th>
 		<th scope="col">Codigo Barras</th>
@@ -59,7 +59,8 @@
 		<td>{{ proveedor.id_grupo }}</td>
 		<td>{{ proveedor.id_unidad }}</td>
 		<td><input type="button" value="edit" id="{{proveedor.pk}}"
-		 onclick="AbrirCentrado('{% url 'vista_editar_item' %}?pk={{ proveedor.pk }}','ventanauno',300,450,'','');"></td>
+		 onclick="AbrirCentrado('{% url 'vista_editar_item' %}?pk={{ proveedor.pk }}','ventanauno',300,450,'','');">
+		 </td>
 	</tr>
     {% endfor %}
 </table>
