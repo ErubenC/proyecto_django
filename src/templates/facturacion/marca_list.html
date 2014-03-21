@@ -18,6 +18,12 @@
 			$("#tabla").load("/lista_marcas?page=1");
 		});
 	{% endif %}
+	
+	function abrir() { 
+		open('/lista_marcas/','','top=300,left=300,width=300,height=300') ;
+	} 
+	
+	
 	});
 {% endblock script %}
 {% block content %}
@@ -28,11 +34,14 @@
 	<tr>
 		<th scope="col">Nombre</th>
 		<th scope="col">Codigo Propio</th>
+		<th scope="col">Editar</th>
 	</tr>
     {% for proveedor in object_list %}
     <tr>
 		<td>{{ proveedor.nombre }}</td>
 		<td>{{ proveedor.codigo_propio }}</td>
+		<td><input type="button" value="edit" id="{{proveedor.pk}}"
+		 onclick="AbrirCentrado('{% url 'vista_editar_marca' %}?pk={{ proveedor.pk }}','ventanauno',300,300,'','');"></td>
 	</tr>
     {% endfor %}
 </table>
@@ -52,6 +61,8 @@
             	{% endif %}
             </span>
         </div>
+        
+        
     {% endif %}
 
 {% else %}

@@ -1,6 +1,12 @@
 {% extends 'facturacion/base_pro_cli.html' %}
 {% block title %} Agregar Proveedor {% endblock %}
+{% block script %}
 
+	$(function() {
+		$("#tabla").load("/lista_proveedores/");	
+	});
+
+{% endblock script %}
 
 {% block content %}
 <br> <h2>Agregar nuevo proveedor</h2>
@@ -16,5 +22,6 @@
 
 </form>
 
+<div id="tabla"></div>
 
 {% endblock %}

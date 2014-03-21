@@ -2,15 +2,10 @@
 {% block title %} Agregar Item {% endblock %}
 {% block script %}
 
-<script>
-var marcas="";
+	$(function() {
+		$("#tabla").load("/lista_items/");	
+	});
 
-
-  $(function() {
-  	
-   
-  });
-  </script>
 {% endblock script %}
 {% block content %}
 
@@ -27,5 +22,6 @@ var marcas="";
 
 </form>
 
+<div id="tabla"></div>
 
 {% endblock %}

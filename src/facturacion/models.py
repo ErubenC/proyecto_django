@@ -54,6 +54,8 @@ class Item(models.Model):
     
     def __str__(self):              # __unicode__ on Python 2
         return self.descripcion
+    class Meta:
+        ordering = ['codigo_propio']
 
 
 '''
@@ -90,7 +92,9 @@ class Proveedor(models.Model):
     fax = models.CharField(max_length=30)
     canton = models.ForeignKey(Canton)
     def __str__(self):              # __unicode__ on Python 2
-        return self.razon_social
+        return self.nombre_comercial
+    class Meta:
+        ordering = ['nombre_comercial']
     
 class Cliente(models.Model):
     nombre_comercial = models.CharField(max_length=50)
@@ -104,7 +108,9 @@ class Cliente(models.Model):
     fax = models.CharField(max_length=30)
     canton = models.ForeignKey(Canton)
     def __str__(self):              # __unicode__ on Python 2
-        return self.razon_social
+        return self.nombre_comercial
+    class Meta:
+        ordering = ['nombre_comercial']
     
 
 '''

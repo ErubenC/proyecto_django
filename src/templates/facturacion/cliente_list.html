@@ -4,48 +4,58 @@
 	
 	{% if page_obj.has_next %}
 		$("#siguiente").button().click(function(e){
-			$("#tabla").load("/lista_bodegas?page={{ page_obj.next_page_number }}");
+			$("#tabla").load("/lista_clientes?page={{ page_obj.next_page_number }}");
 		});
 		$("#final").button().click(function(e){
-			$("#tabla").load("/lista_bodegas?page={{ page_obj.paginator.num_pages }}");
+			$("#tabla").load("/lista_clientes?page={{ page_obj.paginator.num_pages }}");
 		});
 	{% endif %}
 	{% if page_obj.has_previous %}
 		$("#anterior").button().click(function(e){
-			$("#tabla").load("/lista_bodegas?page={{ page_obj.previous_page_number }}");
+			$("#tabla").load("/lista_clientes?page={{ page_obj.previous_page_number }}");
 		});
 		$("#inicio").button().click(function(e){
-			$("#tabla").load("/lista_bodegas?page=1");
+			$("#tabla").load("/lista_clientes?page=1");
 		});
 	{% endif %}
 	
-	function abrir() { 
-		open('/lista_marcas/','','top=300,left=300,width=300,height=300') ;
-	} 
-	
-	
+
 	});
 {% endblock script %}
 {% block content %}
 {% if object_list %}
 <table border="9" >
-	<caption><b><font size="6">Bodegas</font></b></caption>
+	<caption><b><font size="6">Clientes</font></b></caption>
 	<tr>
-		<th scope="col">Nombre</th>
+		<th scope="col">Nombre Comercial</th>
 		<th scope="col">Codigo Propio</th>
+		<th scope="col">Razon Social</th>
+		<th scope="col">Ruc</th>
 		<th scope="col">Direccion</th>
+		<th scope="col">Canton</th>
+		<th scope="col">Correo</th>
+		<th scope="col">Telefono</th>
+		<th scope="col">Fax</th>
 		<th scope="col">Editar</th>
 	</tr>
     {% for proveedor in object_list %}
     <tr>
-		<td>{{ proveedor.nombre }}</td>
+		<td>{{ proveedor.nombre_comercial }}</td>
 		<td>{{ proveedor.codigo_propio }}</td>
+		<td>{{ proveedor.razon_social }}</td>
+		<td>{{ proveedor.ruc }}</td>
 		<td>{{ proveedor.direccion }}</td>
+		<td>{{ proveedor.canton }}</td>
+		<td>{{ proveedor.mail }}</td>
+		<td>{{ proveedor.telefono }}</td>
+		<td>{{ proveedor.fax }}</td>
 		<td><input type="button" value="edit" id="{{proveedor.pk}}"
-		 onclick="AbrirCentrado('{% url 'vista_editar_bodega' %}?pk={{ proveedor.pk }}','ventanauno',300,300,'','');"></td>
+		 onclick="AbrirCentrado('{% url 'vista_editar_cliente' %}?pk={{ proveedor.pk }}','ventanauno',300,450,'','');">
+		 </td>
 	</tr>
     {% endfor %}
 </table>
+
 {% if is_paginated %}
         <div class="pagination">
             <span class="page-links">
@@ -63,10 +73,11 @@
             </span>
         </div>
         
+        
 {% endif %}
 
 {% else %}
-	<h3>No existen bodegas.</h3>
+	<h3>No existen proveedores.</h3>
 {% endif %}
 
 

@@ -1,4 +1,25 @@
 <script>
+
+function popup(url,ancho,alto) {
+var posicion_x; 
+var posicion_y; 
+posicion_x=(screen.width/2)-(ancho/2); 
+posicion_y=(screen.height/2)-(alto/2); 
+window.open(url, "ventanauno", "width="+ancho+",height="+alto+",menubar=0,toolbar=0,directories=0,scrollbars=no,resizable=no,left=500,top=500");
+}
+
+
+function AbrirCentrado(Url,NombreVentana,width,height,extras,scrollbars) {
+var largo = width;
+var altura = height;
+var adicionales= extras;
+var top = (screen.height-altura)/2;
+var izquierda = (screen.width-largo)/2; nuevaVentana=window.open(''+ Url + '',''+ NombreVentana + '','width=' + largo + ',height=' + altura + ',top=' + top + ',left=' + izquierda + ',features=' + adicionales + '' + ',scrollbars=1');
+nuevaVentana.focus();
+}
+
+
+
 {% block script %}
 
 {% endblock script %}

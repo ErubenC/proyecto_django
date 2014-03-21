@@ -4,18 +4,18 @@
 	
 	{% if page_obj.has_next %}
 		$("#siguiente").button().click(function(e){
-			$("#tabla").load("/lista_bodegas?page={{ page_obj.next_page_number }}");
+			$("#tabla").load("/lista_items?page={{ page_obj.next_page_number }}");
 		});
 		$("#final").button().click(function(e){
-			$("#tabla").load("/lista_bodegas?page={{ page_obj.paginator.num_pages }}");
+			$("#tabla").load("/lista_items?page={{ page_obj.paginator.num_pages }}");
 		});
 	{% endif %}
 	{% if page_obj.has_previous %}
 		$("#anterior").button().click(function(e){
-			$("#tabla").load("/lista_bodegas?page={{ page_obj.previous_page_number }}");
+			$("#tabla").load("/lista_items?page={{ page_obj.previous_page_number }}");
 		});
 		$("#inicio").button().click(function(e){
-			$("#tabla").load("/lista_bodegas?page=1");
+			$("#tabla").load("/lista_items?page=1");
 		});
 	{% endif %}
 	
@@ -29,23 +29,42 @@
 {% block content %}
 {% if object_list %}
 <table border="9" >
-	<caption><b><font size="6">Bodegas</font></b></caption>
+	<caption><b><font size="6">Items</font></b></caption>
 	<tr>
-		<th scope="col">Nombre</th>
 		<th scope="col">Codigo Propio</th>
-		<th scope="col">Direccion</th>
+		<th scope="col">Codigo Barras</th>
+		<th scope="col">Descripcion</th>
+		<th scope="col">Bien o Servicio</th>
+		<th scope="col">Iva</th>
+		<th scope="col">Ubicacion</th>
+		<th scope="col">Marca</th>
+		<th scope="col">Grupo</th>
+		<th scope="col">Unidad</th>
 		<th scope="col">Editar</th>
 	</tr>
     {% for proveedor in object_list %}
     <tr>
-		<td>{{ proveedor.nombre }}</td>
 		<td>{{ proveedor.codigo_propio }}</td>
-		<td>{{ proveedor.direccion }}</td>
+		<td>{{ proveedor.codigo_barras }}</td>
+		<td>{{ proveedor.descripcion }}</td>
+		<td>{% if proveedor.es_bien %}
+				Bien
+			{% else %}
+				Servicio
+			{% endif %}
+		</td>
+		<td>{{ proveedor.iva }}</td>
+		<td>{{ proveedor.ubicacion }}</td>
+		<td>{{ proveedor.id_marca }}</td>
+		<td>{{ proveedor.id_grupo }}</td>
+		<td>{{ proveedor.id_unidad }}</td>
 		<td><input type="button" value="edit" id="{{proveedor.pk}}"
-		 onclick="AbrirCentrado('{% url 'vista_editar_bodega' %}?pk={{ proveedor.pk }}','ventanauno',300,300,'','');"></td>
+		 onclick="AbrirCentrado('{% url 'vista_editar_item' %}?pk={{ proveedor.pk }}','ventanauno',300,450,'','');">
+		 </td>
 	</tr>
     {% endfor %}
 </table>
+
 {% if is_paginated %}
         <div class="pagination">
             <span class="page-links">
@@ -63,11 +82,10 @@
             </span>
         </div>
         
+        
 {% endif %}
-
 {% else %}
-	<h3>No existen bodegas.</h3>
+	<h3>No existen items.</h3>
 {% endif %}
-
 
 {% endblock content %}
