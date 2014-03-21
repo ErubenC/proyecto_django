@@ -1,4 +1,28 @@
+{% extends 'facturacion/base_listas.html' %}
+{% block script %}
 
+	$(function() {
+	
+	{% if page_obj.has_next %}
+		$("#siguiente").button().click(function(e){
+			$("#tabla").load("/lista_unidades?page={{ page_obj.next_page_number }}");
+		});
+		$("#final").button().click(function(e){
+			$("#tabla").load("/lista_unidades?page={{ page_obj.paginator.num_pages }}");
+		});
+	{% endif %}
+	{% if page_obj.has_previous %}
+		$("#anterior").button().click(function(e){
+			$("#tabla").load("/lista_unidades?page={{ page_obj.previous_page_number }}");
+		});
+		$("#inicio").button().click(function(e){
+			$("#tabla").load("/lista_unidades?page=1");
+		});
+	{% endif %}
+	
+	});
+{% endblock script %}
+{% block content %}
 {% if object_list %}
 <table border="9" >
 	<caption><b><font size="6">Unidad</font></b></caption>
@@ -6,16 +30,39 @@
 		<th scope="col">Nombre</th>
 		<th scope="col">Codigo Propio</th>
 		<th scope="col">Descripcion</th>
+		<th scope="col">Editar</th>
 	</tr>
     {% for proveedor in object_list %}
     <tr>
 		<td>{{ proveedor.nombre }}</td>
 		<td>{{ proveedor.codigo_propio }}</td>
 		<td>{{ proveedor.descripcion }}</td>
+		<td><input type="button" value="edit" id="{{proveedor.pk}}"
+		 onclick="AbrirCentrado('{% url 'vista_editar_unidad' %}?pk={{ proveedor.pk }}','ventanauno',300,300,'','');"></td>
 	</tr>
     {% endfor %}
 </table>
+{% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                	<input type="button" id="inicio" value="<<">
+            		<input type="button" id="anterior" value="<">
+                {% endif %}
+                <span class="page-current">
+                    Pagina {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                	<input type="button" id="siguiente" value=">">
+                	<input type="button" id="final" value=">>">
+            	{% endif %}
+            </span>
+        </div>
+        
+        
+    {% endif %}
+
 {% else %}
 	<h3>No existen unidades.</h3>
 {% endif %}
-
+{% endblock content %}

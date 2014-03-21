@@ -34,7 +34,7 @@ class ItemForm(forms.Form):
     marca = forms.ModelChoiceField(queryset=Marca.objects.all())
     grupo = forms.ModelChoiceField(queryset=GrupoItem.objects.all())
     unidad = forms.ModelChoiceField(queryset=Unidad.objects.all())
-    bodega = forms.ModelChoiceField(queryset=Bodega.objects.all(),required=False)
+    #bodega = forms.ModelChoiceField(queryset=Bodega.objects.all(),required=False)
     
 
 class ProveedoresForm(forms.Form):

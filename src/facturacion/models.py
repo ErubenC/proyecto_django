@@ -53,6 +53,8 @@ class Item(models.Model):
     
     def __str__(self):              # __unicode__ on Python 2
         return self.descripcion
+    class Meta:
+        ordering = ['codigo_propio']
 
 
 '''
