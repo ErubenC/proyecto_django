@@ -116,16 +116,22 @@ class Transaccion(models.Model):
     codigo = models.BigIntegerField(unique=True)
     descripcion = models.CharField(max_length=60)
     tabs = models.CharField(max_length=10)
+    def __str__(self):              # __unicode__ on Python 2
+        return self.descripcion
     
 class Grupo_doc(models.Model):
     codigo = models.BigIntegerField(unique=True)
     descripcion = models.CharField(max_length=60)
     tabs = models.CharField(max_length=10)
+    def __str__(self):              # __unicode__ on Python 2
+        return self.descripcion
     
 class Rubro_cancelacion(models.Model):
     codigo = models.BigIntegerField(unique=True)
     descripcion = models.CharField(max_length=60)
     tabs = models.CharField(max_length=10)
+    def __str__(self):              # __unicode__ on Python 2
+        return self.descripcion
     
 class Documento(models.Model):
     codigo = models.BigIntegerField(unique=True)
@@ -137,6 +143,8 @@ class Documento(models.Model):
     transaccion = models.ForeignKey(Transaccion)
     grupo_doc = models.ForeignKey(Grupo_doc)
     rubro_cancelacion = models.ForeignKey(Rubro_cancelacion)
+    def __str__(self):              # __unicode__ on Python 2
+        return self.descripcion
     
                                     
                                      

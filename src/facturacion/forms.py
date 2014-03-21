@@ -64,15 +64,15 @@ class ClientesForm(forms.Form):
     
 
 class CrearDocumentoForm(forms.Form):
-    codigo_propio = forms.CharField(widget=forms.TextInput())
+    codigo = forms.CharField(widget=forms.TextInput())
     descripcion = forms.CharField(widget=forms.TextInput())
     tabs = forms.CharField(widget=forms.TextInput())
     iva = forms.BooleanField(label='Lleva IVA',initial=False,required=False)
     con_precio = forms.BooleanField(label='Lleva precio',initial=False,required=False)
     con_items = forms.BooleanField(label='Lleva items',initial=False,required=False)
-    transaccion = forms.ModelChoiceField(queryset=Transaccion.objects.order_by('descripcion'))
-    grupo_doc = forms.ModelChoiceField(label='Grupo de documento',queryset=Grupo_doc.objects.order_by('descripcion'))
-    rubro_canc = forms.ModelChoiceField(label='Rubro de cancelacion',queryset=Rubro_cancelacion.objects.order_by('descripcion'))
+    transaccion = forms.ModelChoiceField(queryset=Transaccion.objects.all())
+    grupo_doc = forms.ModelChoiceField(label='Grupo de documento',queryset=Grupo_doc.objects.all())
+    rubro_canc = forms.ModelChoiceField(label='Rubro de cancelacion',queryset=Rubro_cancelacion.objects.all())
    
 class TransaccionForm(forms.Form):
     codigo = forms.CharField(widget=forms.TextInput())
